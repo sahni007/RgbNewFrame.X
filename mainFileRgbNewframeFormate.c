@@ -82,7 +82,9 @@ unsigned char copymainReceivedDataBuffer[RECIEVED_DATA_LENGTH]="#";
 unsigned char tempReceivedDataBuffer[RECIEVED_DATA_LENGTH-8]="#";
 unsigned char parentalLockBuffer[5]="00000";
 unsigned char currentStateBuffer[(TOTAL_NUMBER_OF_SWITCH*4)+2]="#";
-
+char* ConvertmaindataReceiveIntoString = "0";
+char *ModuleNameToken;
+int partCounter=0;
 unsigned int M1;unsigned int M2;unsigned int M3;unsigned int M4;unsigned int M5;
 
 
@@ -127,10 +129,18 @@ interrupt void isr(){
         #ifdef DEBUG
         TX1REG = copymainReceivedDataBuffer[mainReceivedDataPosition];
         #endif
-        if()
+        ConvertmaindataReceiveIntoString = copymainReceivedDataBuffer;
+        ModuleNameToken = strtok(ConvertmaindataReceiveIntoString,".");
+        if(ModuleNameToken[0] == 'R' || ModuleNameToken[0] == 'S' && ModuleNameToken[1] == 'G' || ModuleNameToken[1] == 'W')
         {
             mainReceivedDataPosition++;
-            if(mainReceivedDataPosition>15){
+            
+            if(mainReceivedDataPosition>29){
+                while(ModuleNameToken != NULL)
+                {
+                    partCounter++;
+                    ModuleNameToken = strtok(NULL,".");
+                }
                 mainDataReceived=TRUE;
                 mainReceivedDataPosition=0;                
                 RC1IF=0;                
