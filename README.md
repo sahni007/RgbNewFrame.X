@@ -1,1 +1,37 @@
 # RgbNewFrame.X
+ this is proper working code for 2 switches and one rgb strip
+ 
+ // Pin MACROS
+#define OUTPUT_RELAY1 PORTFbits.RF1
+#define OUTPUT_RELAY2 PORTFbits.RF0
+#define OUTPUT_FOR_RED_LED PORTAbits.RA3 ///pwm for red
+#define OUTPUT_FOR_GREEN_LED PORTAbits.RA2 //pwm for green
+#define OUTPUT_FOR_BLUE_LED PORTEbits.RE5   // PWM for blue
+
+#define INPUTSWITCH1 PORTFbits.RF7
+#define INPUTSWITCH2 PORTFbits.RF5
+#define INPUTSWITCH3 PORTFbits.RF3
+#define INPUTSWITCH4 PORTFbits.RF2
+#define INPUTSWITCH5 PORTAbits.RA5
+
+#define INPUT_SWITCH_DIR_1 TRISFbits.TRISF7
+#define INPUT_SWITCH_DIR_2 TRISFbits.TRISF5
+#define INPUT_SWITCH_DIR_3 TRISFbits.TRISF3
+#define INPUT_SWITCH_DIR_4 TRISFbits.TRISF2
+#define INPUT_SWITCH_DIR_5 TRISAbits.TRISA5
+
+#define OUTPUT_RELAY_DIR_1 TRISFbits.TRISF0
+#define OUTPUT_RELAY_DIR_2 TRISFbits.TRISF1
+#define OUTPUT_RELAY_RED_LED_DIR TRISAbits.TRISA3
+#define OUTPUT_RELAY_GREEN_LED_DIR TRISAbits.TRISA2
+#define OUTPUT_RELAY_BLUE_LED_DIR TRISEbits.TRISE5        // direction of PWM OUTPUT to MOC3021
+
+/*
+ * Extra Periferals Direction and PORT
+ */
+#define ZCD_CCP9_DIR TRISEbits.TRISE3
+#define ZCD_CCP1_DIR TRISCbits.TRISC2
+#define ZCD_CCP3_DIR TRISGbits.TRISG0
+// USART Directions
+#define USART_1_TRANSMIT_OUTPUT_DIR TRISCbits.TRISC6
+#define USART_1_RECIEVE_INPUT_DIR TRISCbits.TRISC7
