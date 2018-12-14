@@ -5281,11 +5281,13 @@ copymainReceivedDataBuffer[mainReceivedDataPosition] = mainReceivedDataBuffer[ma
 
 TX1REG=copymainReceivedDataBuffer[mainReceivedDataPosition];
 
-if(copymainReceivedDataBuffer[0] == 'S' || copymainReceivedDataBuffer[0] == 'R'){
+if(copymainReceivedDataBuffer[0] == 'R'){
+
 mainReceivedDataPosition++;
 if(mainReceivedDataPosition > 30){
 mainDataReceived=1;
-errorsISR("ISR");
+ErrorNames[0]='O'; ErrorNames[1]='K';
+errorsISR(ErrorNames);
 mainReceivedDataPosition=0;
 RC1IF=0;
 }
@@ -5302,7 +5304,7 @@ errorsISR(ErrorNames);
 
 }
 
-# 226
+# 228
 int main() {
 _delay((unsigned long)((2000)*(16000000/4000.0)));
 M1=1; M2=1; M3=1; M4=1; M5=1;
@@ -5313,10 +5315,11 @@ allPeripheralInit();
 
 while(1){
 if(mainDataReceived == 1){
-
+ErrorNames[0]='M'; ErrorNames[1]='A'; ErrorNames[2]='I'; ErrorNames[3]='N';
+errorsMain(ErrorNames);
 mainDataReceived=0;
 
-# 321
+# 324
 if(copymainReceivedDataBuffer[0] == 'R' && copymainReceivedDataBuffer[1] == 'G' && copymainReceivedDataBuffer[2] == 'B' && copymainReceivedDataBuffer[7] == 'A'
 && copymainReceivedDataBuffer[8] == 'C' && copymainReceivedDataBuffer[9] == 'T' && copymainReceivedDataBuffer[27] == '1' && copymainReceivedDataBuffer[29] == '|'){
 errorsMain("OK");
@@ -5452,7 +5455,7 @@ M4=0;
 }
 }
 
-# 459
+# 462
 void GPIO_pin_Initialize(){
 clearAllPorts();
 pinINIT_extra();
@@ -5467,20 +5470,20 @@ TRISFbits.TRISF0 = 0;
 TRISAbits.TRISA3 = 0;
 TRISAbits.TRISA2 = 0;
 
-# 477
+# 480
 TRISCbits.TRISC6 = 0;
 TRISCbits.TRISC7 = 1;
 
 clearAllPorts();
 }
 
-# 486
+# 489
 void allPeripheralInit(){
 EUSART_Initialize();
 
 }
 
-# 494
+# 497
 void EUSART_Initialize(){
 PIE1bits.RC1IE = 0;
 PIE1bits.TX1IE = 0;
@@ -5552,7 +5555,7 @@ Tx_count++;
 }
 }
 
-# 568
+# 571
 void pinINIT_extra(){
 ANSELG=0x00; WPUG = 0;
 
@@ -5567,7 +5570,7 @@ ANSELB=0x00; WPUB=0x00;
 ANSELA=0x00;
 }
 
-# 585
+# 588
 void clearAllPorts(){
 PORTFbits.RF1=0;
 PORTFbits.RF0=0;

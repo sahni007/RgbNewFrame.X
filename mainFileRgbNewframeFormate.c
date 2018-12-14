@@ -196,11 +196,13 @@ interrupt void isr(){
         #ifdef DEBUG
         TX1REG=copymainReceivedDataBuffer[mainReceivedDataPosition];
         #endif
-        if(copymainReceivedDataBuffer[0] == 'S' || copymainReceivedDataBuffer[0] == 'R'){
+        if(copymainReceivedDataBuffer[0] == 'R'){
+            
             mainReceivedDataPosition++;
             if(mainReceivedDataPosition > 30){
                 mainDataReceived=TRUE;   
-                errorsISR("ISR");
+                 ErrorNames[0]='O';      ErrorNames[1]='K';     
+            errorsISR(ErrorNames); 
                 mainReceivedDataPosition=0;                
                 RC1IF=0;                
             }
@@ -233,7 +235,8 @@ int main() {
     
     while(1){       
         if(mainDataReceived == TRUE){
-           // errorsMain("MAIN");OK
+               ErrorNames[0]='M';      ErrorNames[1]='A';      ErrorNames[2]='I';      ErrorNames[3]='N';
+                errorsMain(ErrorNames);
             mainDataReceived=FALSE;       
             //ConvertmaindataReceiveIntoString = copymainReceivedDataBuffer;
 //            int i=0;
