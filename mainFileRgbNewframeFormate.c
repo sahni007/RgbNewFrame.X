@@ -3,7 +3,7 @@
  * Author: VARUNS SAHNI
  *
  * Created on 8 April, 2018, 8:40 PM
- * this is test code of 4 on off switches
+ * this is working code of 4 on off switches
  */
 //INPUT FRAME: SW/RGB.<device_number>.ACT.<status>.<REedColorIntensity>.<greencolorintensity>.<bluecolorintensity>.<chilLock>.<finalframebit>.|
 //example: SW.01.ACT.255.255.255.0.1.|
